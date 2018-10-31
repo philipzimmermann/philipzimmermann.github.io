@@ -16,8 +16,13 @@
 title: Welcome, Friends
 email: phixxx5@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
+<<<<<<< HEAD
   My name is Philip Zimmermann and I'm currently studying Computer Science in Munich. I'm interested in coding, hiking and photography. This is gonna be my blog.
+baseurl: "/blog" # the subpath of your site, e.g. /blog
+=======
+  My name is Philip Zimmermann and I'm currently studying Computer Science in Munich. This is gonna be my blog.
 baseurl: "" # the subpath of your site, e.g. /blog
+>>>>>>> bf1aa2f6c3952dfc72c807531f81b2ba5665eee0
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  phixxx5
 
