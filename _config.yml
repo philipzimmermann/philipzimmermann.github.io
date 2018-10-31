@@ -23,7 +23,7 @@ github_username:  phixxx5
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-cayman
+theme: minima
 plugins:
   - jekyll-feed
 
