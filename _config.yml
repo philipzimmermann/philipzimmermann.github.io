@@ -14,18 +14,18 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Welcome, Friends
-email: phixxx5@gmail.com
+#email: phixxx5@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   My name is Philip Zimmermann and I'm currently studying Computer Science in Munich. I'm interested in coding, hiking and photography. This is gonna be my blog.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-github_username:  phixxx5
+#baseurl: "" # the subpath of your site, e.g. /blog
+#url: "" # the base hostname & protocol for your site, e.g. http://example.com
+#github_username:  phixxx5
 
 # Build settings
-markdown: kramdown
+#markdown: kramdown
 theme: jekyll-theme-merlot
-plugins:
-  - jekyll-feed
+#plugins:
+#  - jekyll-feed
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
