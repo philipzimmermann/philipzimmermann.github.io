@@ -367,8 +367,6 @@
             show_finished();
             df = drop_columns(df);
             df = fix_artist_names(df);
-            console.log(df.iloc({rows: [38, 39, 40]}));
-
             df.plot("plot_div1").line({
                 config: {
                     x: 'added_at', y: 'artist_popularity'
