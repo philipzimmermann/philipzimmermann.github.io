@@ -378,8 +378,8 @@ if (access_token && (state == null || state !== storedState)) {
     document.getElementById('login-button').addEventListener('click', function () {
 
         let client_id = '377f99f3c4f6461c9704b0b463b8f951'; // Your client id
-        //let redirect_uri = 'https://philipzimmermann.github.io/spotilytics'; // Your redirect uri
-        let redirect_uri = 'http://localhost:63342/phixxx5.github.io/spotilytics.html';
+        let redirect_uri = 'https://philipzimmermann.github.io/spotilytics'; // Your redirect uri
+        //let redirect_uri = 'http://localhost:63342/phixxx5.github.io/spotilytics.html';
 
         let state = generateRandomString(16);
 
