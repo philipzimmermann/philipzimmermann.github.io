@@ -264,7 +264,8 @@ function make_pie_plot(df) {
         return sum + genre_counts[key]
     }, 0);
     let keys = null;
-    while (Object.keys(genre_counts).length > 10) {
+    let all_genres = Object.keys(genre_counts);
+    while (Object.keys(genre_counts).length > 10) {  // keep only 10 biggest genres
         keys = Object.keys(genre_counts);
         //find smallest genre
         let min_genre = null;
@@ -277,14 +278,8 @@ function make_pie_plot(df) {
                 min = genre_counts[genre];
             }
         }
-        delete genre_counts[genre]
+        delete genre_counts[min_genre]
     }
-    /*for (let i = 0; i < keys.length; i++) {
-        let genre = keys[i];
-        if (genre_counts[genre] / sum < 0.015) {
-            delete genre_counts[genre];
-        }
-    }*/
     let genres = Object.keys(genre_counts);
     let counts = Object.keys(genre_counts).map(function (key) {
         return genre_counts[key];
@@ -297,9 +292,31 @@ function make_pie_plot(df) {
     return genres;
 }
 
-function make_stacked_bar_plot(df) {
-
+function make_stacked_bar_plot(df, genres, min_year, max_year, date_times) {
+    let years = range(max_year - min_year + 1, min_year);
+    let genre_counts = {};
+    for (let i = 0; i < genres.length; i++) {
+        genre_counts[genres[i]] = {
+            x: years,
+            y: [...Array(years.length).keys()].map(i => 0),
+            name: genres[i],
+            type: 'bar'
+        };
+    }
+    for (let row = 0; row < df.index.length; row++) {
+        let genres = df.at(row, 'artist_genres');
+        let year = date_times.year().iat(row);
+        for (let i = 0; i < genres[0].length; i++) {
+            let genre = genres[0][i];
+            if (genre in genre_counts) {
+                genre_counts[genre]['y'][year - min_year]++;
+            }
+        }
+    }
+    Plotly.newPlot('plot_div3', Object.values(genre_counts), {barmode: 'stack'})
 }
+
+var global_df;
 
 async function compute_plots(token) {
     show_loader();
@@ -319,7 +336,11 @@ async function compute_plots(token) {
         }
     });
     let genres = make_pie_plot(df);
-    make_stacked_bar_plot(df, genres);
+    global_df = df;
+    let dates = dfd.toDateTime(df['added_at']);
+    let min_year = dates.year().min();
+    let max_year = dates.year().max();
+    make_stacked_bar_plot(df, genres, min_year, max_year, dates);
 }
 
 function removeHash() {
@@ -357,7 +378,8 @@ if (access_token && (state == null || state !== storedState)) {
     document.getElementById('login-button').addEventListener('click', function () {
 
         let client_id = '377f99f3c4f6461c9704b0b463b8f951'; // Your client id
-        let redirect_uri = 'https://philipzimmermann.github.io/spotilytics'; // Your redirect uri
+        //let redirect_uri = 'https://philipzimmermann.github.io/spotilytics'; // Your redirect uri
+        let redirect_uri = 'http://localhost:63342/phixxx5.github.io/spotilytics.html';
 
         let state = generateRandomString(16);
 
