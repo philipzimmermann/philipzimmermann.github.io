@@ -27,7 +27,7 @@ function generateRandomString(length) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return text;
-};
+}
 
 async function collectLibraryTracks(token) {
     let next = true;
@@ -263,16 +263,28 @@ function make_pie_plot(df) {
     let sum = Object.keys(genre_counts).reduce(function (sum, key) {
         return sum + genre_counts[key]
     }, 0);
-    console.log("Sum:" + sum);
-    let keys = Object.keys(genre_counts);
-    for (let i = 0; i < keys.length; i++) {
+    let keys = null;
+    while (Object.keys(genre_counts).length > 10) {
+        keys = Object.keys(genre_counts);
+        //find smallest genre
+        let min_genre = null;
+        let min = Infinity;
+        let genre = null;
+        for (let i = 0; i < keys.length; i++) {
+            genre = keys[i];
+            if (genre_counts[genre] < min) {
+                min_genre = genre;
+                min = genre_counts[genre];
+            }
+        }
+        delete genre_counts[genre]
+    }
+    /*for (let i = 0; i < keys.length; i++) {
         let genre = keys[i];
         if (genre_counts[genre] / sum < 0.015) {
             delete genre_counts[genre];
         }
-    }
-    console.log(Object.keys(genre_counts));
-    console.log(genre_counts);
+    }*/
     let genres = Object.keys(genre_counts);
     let counts = Object.keys(genre_counts).map(function (key) {
         return genre_counts[key];
@@ -281,13 +293,12 @@ function make_pie_plot(df) {
         values: counts,
         labels: genres,
         type: 'pie'
-    }], {
+    }], {});
+    return genres;
+}
 
-        /*height: 400,
+function make_stacked_bar_plot(df) {
 
-        width: 500*/
-
-    });
 }
 
 async function compute_plots(token) {
@@ -307,10 +318,8 @@ async function compute_plots(token) {
             x: 'added_at', y: 'artist_popularity'
         }
     });
-
-    make_pie_plot(df);
-
-
+    let genres = make_pie_plot(df);
+    make_stacked_bar_plot(df, genres);
 }
 
 function removeHash() {
