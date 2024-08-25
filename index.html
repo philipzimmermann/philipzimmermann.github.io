@@ -1,11 +1,44 @@
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>Phil's Blog</title>
-  <meta http-equiv="Refresh" content="0; url=https://home.in.tum.de/~zimmermp/" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kalman Filter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/graph.svg" />
+    <script src="https://cdn.plot.ly/plotly-2.34.0.min.js" charset="utf-8"></script>
 </head>
 
 <body>
-  <p>Please follow <a href="https://home.in.tum.de/~zimmermp/">this link</a></p>
+    <div class="content">
+        <h1>Kalman Filter</h1>
+        <p>The Kalman Filter is an algorithm for estimating the state of a system in the presence of uncertainty. The
+            algorithm was developed by the Hungarian-American engineer Rudolf E. Kálmán and is ubiquitous today in
+            applications such as robotics, navigation and control.</p>
+        <p>One of the biggest advantages of the Kalman Filter is its ability to combine measurements from multiple
+            different
+            sensors into one model.</p>
+        <p>The goal of this website is to offer an interactive playground in order to gain a better intuition for the
+            effects of the algorithm. </p>
+        <h2>Theory</h2>
+        <p>We will have a short introduction on the theory behind the Kalman Filter before playing around with it.
+        </p>
+        <h2>Our Application</h2>
+        <p>We will look at the following simplified use case for a Kalman Filter: A car is
+            driving in one direction with changing velocity <b>v</b> over a period of time. We are trying to predict
+            the
+            current position of the car at all times. However we only periodically receive measurements of the current
+            velocity from the speedometer and the current position from a GPS sensor. Moreover, both sensors are
+            imperfect and deliver
+            noisy data.</p>
+        <p>The real velocity and driven distance (that we are trying to find) are shown in the following plots:</p>
+        <div id="velocityPlot" class="plot"></div>
+        <div id="distancePlot" class="plot"></div>
+        <img id="carIcon" src="assets/car.svg" />
+        <h3>The Inputs</h3>
+    </div>
+    <script src="scripts.js"></script>
 </body>
+
 </html>

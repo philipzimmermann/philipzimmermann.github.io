@@ -1,0 +1,29 @@
+div.content {
+    width: 960px;
+    margin: auto;
+}
+
+div.plot {
+    width: 800px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+@keyframes move-right {
+    from {
+        position: relative;
+        left: 120px;
+    }
+
+    to {
+        position: relative;
+        left: 640px;
+    }
+}
+
+#carIcon {
+    animation-name: move-right;
+    animation-duration: 4s;
+    animation-fill-mode: both;
+    animation-timing-function: ease-in-out;
+}
